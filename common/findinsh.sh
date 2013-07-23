@@ -1,4 +1,4 @@
 #!/bin/bash
 keyword=$1
 find . -name "*.sh" -exec grep -H $keyword {} \;
-echo a
+echo "end"
