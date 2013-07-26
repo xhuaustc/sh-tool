@@ -1,10 +1,16 @@
 #!/bin/bash
 row=$1
-line=$((row+1))
-devicename=$(adb devices|sed -n "${line}p"|awk '{print $1}')
-if [ -z $2 ]
+echo $row | grep -iq '^[0-9]$'
+if [ $? -eq 0 ] 
 then
-    echo $devicename
+    line=$((row+1))
+    devicename=$(adb devices|sed -n "${line}p"|awk '{print $1}')
+    if [ -z $2 ]
+    then
+        echo $devicename
+    else
+        adb -s $devicename $2 $3 $4 $5 $6
+    fi  
 else
-    adb -s $devicename $2 $3 $4 $5
+    adb $1 $2 $3 $4
 fi
