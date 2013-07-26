@@ -1,0 +1,16 @@
+#!/bin/bash
+cmd=$1
+apkname=$2
+case $cmd in
+    d)          finaldir=$3
+                apktool d $apkname $finaldir;;
+    b)          finalapk=$3
+                apktool b $apkname $finalapk;;
+    package)    packagename=`aapt d badging $apkname | sed -n "1p"`
+                echo $packagename;;
+    permission) aapt d permissions $apkname;;
+    xml)        xmlfile=$3
+                xmlpath=`aapt l $apkname | grep $xmlfile`
+                echo $xmlpath
+                aapt d xmltree $apkname $xmlpath 
+esac
