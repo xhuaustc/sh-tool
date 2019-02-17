@@ -1,8 +1,6 @@
 #!/bin/bash
-yum install wget -y
-wget –no-check-certificate -O shadowsocks.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
-chmod +x shadowsocks.sh
-./shadowsocks.sh
-wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
-chmod +x bbr.sh
-./bbr.sh
+apt-get update
+apt install python3-pip
+pip3 install https://github.com/shadowsocks/shadowsocks/archive/master.zip
+cp shadowsocks.json /etc/shadowsocks.json
+ssserver -c /etc/shadowsocks.json -d start
